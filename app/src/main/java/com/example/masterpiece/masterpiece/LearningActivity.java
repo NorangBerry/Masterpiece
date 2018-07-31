@@ -29,8 +29,5 @@ public class LearningActivity extends AppCompatActivity {
 
 
 
-
-
-
     }
 }

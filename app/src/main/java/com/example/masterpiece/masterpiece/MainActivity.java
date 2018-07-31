@@ -1,14 +1,18 @@
 package com.example.masterpiece.masterpiece;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+
+import java.io.InputStream;
 
 public class MainActivity extends AppCompatActivity {
     private static int REQUEST_SELECT_IMAGE = 3, REQUEST_IMAGE_CAPTURE = 4;
@@ -20,25 +24,24 @@ public class MainActivity extends AppCompatActivity {
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
-        System.out.println("======================");
-        System.out.println(requestCode);
-        System.out.println(resultCode);
         if(resultCode == Activity.RESULT_OK){
             if(requestCode == REQUEST_SELECT_IMAGE){
                 //이미지 데이터를 비트맵으로 받아온다.
                 try {
-                    image = MediaStore.Images.Media.getBitmap(getContentResolver(), data.getData());
-                }catch(Exception e){e.printStackTrace();}
-                Intent intent = new Intent(getApplicationContext(),FilterSelectActivity.class);
-                intent.putExtra("image",image);
-                startActivity(intent);
+                    Uri imageUri = data.getData();
+
+                    System.out.println("===========================");
+                    System.out.println(image);
+                    Intent intent = new Intent(getApplicationContext(),FilterSelectActivity.class);
+                    intent.putExtra("image",imageUri);
+                    startActivity(intent);
+                    }catch(Exception e){e.printStackTrace();}
+
             }
             else if(requestCode == REQUEST_IMAGE_CAPTURE){
-                Bundle extras = data.getExtras();
-                Bitmap image = (Bitmap) extras.get("data");
-
+                Uri u = data.getData();
                 Intent intent = new Intent(getApplicationContext(),FilterSelectActivity.class);
-                intent.putExtra("image",image);
+                intent.putExtra("image",u);
                 startActivity(intent);
             }
         }
@@ -63,8 +66,20 @@ public class MainActivity extends AppCompatActivity {
     }
     public void onClickCamera(View view){
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+//        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+//            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+//        }
+
+        try{
+            takePictureIntent.putExtra("return-data", true);
+            startActivityForResult(takePictureIntent, 4);
+
+        } catch(ActivityNotFoundException e){
+            e.printStackTrace();
         }
+
+
     }
 }
