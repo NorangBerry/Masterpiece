@@ -18,20 +18,20 @@
 
             <ImageView
                 android:id="@+id/learning1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 app:srcCompat="@drawable/ic_launcher_background" />
 
             <ImageView
                 android:id="@+id/learning2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 app:srcCompat="@drawable/ic_launcher_background" />
 
             <ImageView
                 android:id="@+id/learning3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 app:srcCompat="@drawable/ic_launcher_background" />
         </TableRow>
 
@@ -42,20 +42,20 @@
 
             <ImageView
                 android:id="@+id/learning4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 app:srcCompat="@drawable/ic_launcher_background" />
 
             <ImageView
                 android:id="@+id/learning5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 app:srcCompat="@drawable/ic_launcher_background" />
 
             <ImageView
                 android:id="@+id/learning6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 app:srcCompat="@drawable/ic_launcher_background" />
         </TableRow>
 
