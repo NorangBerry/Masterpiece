@@ -98,6 +98,9 @@ public class FilterSelectActivity extends AppCompatActivity {
             }
         };
         queue.add(volleyMultipartRequest);
+
+        Intent intent = new Intent(getApplication(),LearningActivity.class);
+        startActivity(intent);
     }
 
     public byte[] getFileDataFromDrawable(Bitmap bitmap) {

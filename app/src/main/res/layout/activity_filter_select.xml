@@ -9,12 +9,14 @@
         android:id="@+id/origin_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/scrollView"
         app:srcCompat="@android:drawable/alert_light_frame" />
 
     <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/origin_image">
+        android:id="@+id/scrollView"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <LinearLayout
             android:id="@+id/filter_layout"
