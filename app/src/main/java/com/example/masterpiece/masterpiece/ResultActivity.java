@@ -180,6 +180,8 @@ public class ResultActivity extends AppCompatActivity {
         Intent share = new Intent(Intent.ACTION_SEND);
         share.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         share.setDataAndType(photoURI, "image/*");
+        share.putExtra(Intent.EXTRA_STREAM, photoURI);
+
         share.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(Intent.createChooser(share,"Share via"));
     }
