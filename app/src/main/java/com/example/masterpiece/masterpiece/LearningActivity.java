@@ -4,6 +4,7 @@ package com.example.masterpiece.masterpiece;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -68,7 +69,7 @@ public class LearningActivity extends AppCompatActivity {
                     }
                 }));
             }
-        }, 5000,5000);
+        }, 2000,2000);
 
     }
 
@@ -78,38 +79,32 @@ public class LearningActivity extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
 
         // Initialize a new ImageRequest
-        ImageRequest imageRequest = new ImageRequest(
-                "http://143.248.38.75:8080/output?num="+Integer.toString(count), // Image URL
-                new Response.Listener<Bitmap>() { // Bitmap listener
+        InputStreamVolleyRequest request = new InputStreamVolleyRequest(Request.Method.GET, "http://143.248.38.75:8080/output?num="+count,
+                new Response.Listener<byte[]>() {
                     @Override
-                    public void onResponse(Bitmap response) {
-
-
-                        // Do something with response
-                        imageView.setImageBitmap(response);
-
-                        // Save this downloaded bitmap to internal storage
-                        //Uri uri = saveImageToInternalStorage(response);
-
-                        // Display the internal storage saved image to image view
-                        //imageView.setImageURI(uri);
+                    public void onResponse(byte[] response) {
+                        // TODO handle the response
+                        try {
+                            if (response != null) {
+                                Log.d("ResponseLog", response.toString());
+                                imageView.setImageBitmap(BitmapFactory.decodeByteArray(response, 0, response.length));
+                            }
+                        } catch (Exception e) {
+                            // TODO Auto-generated catch block
+                            Log.d("KEY_ERROR", "UNABLE TO DOWNLOAD FILE");
+                            e.printStackTrace();
+                        }
                     }
-                },
-                400, // Image width
-                400, // Image height
-                ImageView.ScaleType.CENTER_CROP, // Image scale type
-                Bitmap.Config.RGB_565, //Image decode configuration
-                new Response.ErrorListener() { // Error listener
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // Do something with error response
-                        error.printStackTrace();
-                    }
-                }
-        );
+                }, new Response.ErrorListener() {
 
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // TODO handle the error
+                error.printStackTrace();
+            }
+        }, null);
         // Add ImageRequest to the RequestQueue
-        requestQueue.add(imageRequest);
+        requestQueue.add(request);
         Log.d("tag","emd");
     }
 

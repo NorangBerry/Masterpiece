@@ -9,30 +9,31 @@
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginStart="20px"
+        android:layout_marginEnd="20px"
+        android:layout_marginTop="20px"
         app:layout_constraintBottom_toTopOf="@id/textView">
 
         <TableRow
             android:layout_width="match_parent"
             android:gravity="center_horizontal"
+
             android:layout_height="match_parent" >
 
             <ImageView
                 android:id="@+id/learning1"
                 android:layout_width="100dp"
-                android:layout_height="100dp"
-                app:srcCompat="@drawable/ic_launcher_background" />
+                android:layout_height="100dp" />
 
             <ImageView
                 android:id="@+id/learning2"
                 android:layout_width="100dp"
-                android:layout_height="100dp"
-                app:srcCompat="@drawable/ic_launcher_background" />
+                android:layout_height="100dp" />
 
             <ImageView
                 android:id="@+id/learning3"
                 android:layout_width="100dp"
-                android:layout_height="100dp"
-                app:srcCompat="@drawable/ic_launcher_background" />
+                android:layout_height="100dp"/>
         </TableRow>
 
         <TableRow
@@ -43,20 +44,17 @@
             <ImageView
                 android:id="@+id/learning4"
                 android:layout_width="100dp"
-                android:layout_height="100dp"
-                app:srcCompat="@drawable/ic_launcher_background" />
+                android:layout_height="100dp" />
 
             <ImageView
                 android:id="@+id/learning5"
                 android:layout_width="100dp"
-                android:layout_height="100dp"
-                app:srcCompat="@drawable/ic_launcher_background" />
+                android:layout_height="100dp"/>
 
             <ImageView
                 android:id="@+id/learning6"
                 android:layout_width="100dp"
-                android:layout_height="100dp"
-                app:srcCompat="@drawable/ic_launcher_background" />
+                android:layout_height="100dp" />
         </TableRow>
 
         <TableRow
@@ -66,21 +64,18 @@
 
             <ImageView
                 android:id="@+id/learning7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_launcher_background" />
+                android:layout_width="100dp"
+                android:layout_height="100dp" />
 
             <ImageView
                 android:id="@+id/learning8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_launcher_background" />
+                android:layout_width="100dp"
+                android:layout_height="100dp" />
 
             <ImageView
                 android:id="@+id/learning9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_launcher_background" />
+                android:layout_width="100dp"
+                android:layout_height="100dp" />
         </TableRow>
 
     </TableLayout>

@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -42,9 +43,7 @@ public class ResultActivity extends AppCompatActivity {
         setContentView(R.layout.activity_result);
         Intent intent = getIntent();
         queue = Volley.newRequestQueue(this);
-        image = intent.getParcelableExtra("image");
         final ImageView imageView = findViewById(R.id.imageView);
-        imageView.setImageBitmap(image);
         image_name = Calendar.getInstance().getTime().toString();
         setResultImage();
     }
@@ -136,6 +135,7 @@ public class ResultActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+        Toast.makeText(this,"save",Toast.LENGTH_SHORT).show();
     }
 
     public void shareImage(View view) {

@@ -94,7 +94,7 @@ public class FilterSelectActivity extends AppCompatActivity {
                 Map<String, AndroidMultiPartEntity.DataPart> params = new HashMap<>();
                 long imagename = System.currentTimeMillis();
                 params.put("image", new AndroidMultiPartEntity.DataPart(imagename + ".jpg",
-                        getFileDataFromDrawable(image)));
+                        getFileDataFromDrawable(Bitmap.createScaledBitmap(image, 400 * image.getWidth()/image.getHeight(), 400, true))));
                 return params;
             }
         };
