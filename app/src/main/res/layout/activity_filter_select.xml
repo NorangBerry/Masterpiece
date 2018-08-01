@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context="com.example.masterpiece.masterpiece.FilterSelectActivity">
     <ImageView
         android:id="@+id/origin_image"
@@ -14,16 +15,16 @@
         app:srcCompat="@android:drawable/alert_light_frame" />
 
     <HorizontalScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="99dp"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <LinearLayout
             android:id="@+id/filter_layout"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
@@ -31,11 +32,13 @@
 
                 <ImageView
                     android:id="@+id/filter1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@mipmap/ic_launcher"
+                    android:layout_width="76dp"
+                    android:layout_height="72dp"
                     android:onClick="sendFilter"
-                    android:tag="Gogh_painting"/>
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/gogh_painting"
+                    android:tag="Gogh_painting"
+                    app:srcCompat="@mipmap/ic_launcher" />
 
                 <TextView
                     android:id="@+id/filter_text1"
@@ -51,12 +54,13 @@
 
                 <ImageView
                     android:id="@+id/filter2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@mipmap/ic_launcher"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
                     android:onClick="sendFilter"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/gogh_portrait"
                     android:tag="Gogh_portrait"
-                    />
+                    app:srcCompat="@mipmap/ic_launcher" />
 
                 <TextView
                     android:id="@+id/filter_text2"
@@ -72,12 +76,13 @@
 
                 <ImageView
                     android:id="@+id/filter3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@mipmap/ic_launcher"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
                     android:onClick="sendFilter"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/monet_painting"
                     android:tag="Monet_painting"
-                    />
+                    app:srcCompat="@mipmap/ic_launcher" />
 
                 <TextView
                     android:id="@+id/filter_text3"
@@ -93,12 +98,13 @@
 
                 <ImageView
                     android:id="@+id/filter4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@mipmap/ic_launcher"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
                     android:onClick="sendFilter"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/monet_portrait"
                     android:tag="Monet_portrait"
-                    />
+                    app:srcCompat="@mipmap/ic_launcher" />
 
                 <TextView
                     android:id="@+id/filter_text4"
@@ -114,15 +120,19 @@
 
                 <ImageView
                     android:id="@+id/filter5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:onClick="sendFilter"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/picaso_painting"
+                    android:tag="Picaso_painting"
                     app:srcCompat="@mipmap/ic_launcher" />
 
                 <TextView
                     android:id="@+id/filter_text5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="TextView"
+                    android:text="피카소(그림)"
                     app:layout_constraintTop_toBottomOf="@id/filter5" />
             </android.support.constraint.ConstraintLayout>
 
@@ -132,15 +142,19 @@
 
                 <ImageView
                     android:id="@+id/filter6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:onClick="sendFilter"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/picaso_portrait"
+                    android:tag="Picaso_portrait"
                     app:srcCompat="@mipmap/ic_launcher" />
 
                 <TextView
                     android:id="@+id/filter_text6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="TextView"
+                    android:text="피카소(인물)"
                     app:layout_constraintTop_toBottomOf="@id/filter6" />
             </android.support.constraint.ConstraintLayout>
 
@@ -150,15 +164,19 @@
 
                 <ImageView
                     android:id="@+id/filter7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:onClick="sendFilter"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/lee_portrait"
+                    android:tag="Lee_portrait"
                     app:srcCompat="@mipmap/ic_launcher" />
 
                 <TextView
                     android:id="@+id/filter_text7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="TextView"
+                    android:text="이중섭(소)"
                     app:layout_constraintTop_toBottomOf="@id/filter7" />
             </android.support.constraint.ConstraintLayout>
 
@@ -168,16 +186,42 @@
 
                 <ImageView
                     android:id="@+id/filter8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:onClick="sendFilter"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/chung_painting"
+                    android:tag="Chung_painting"
                     app:srcCompat="@mipmap/ic_launcher" />
 
                 <TextView
                     android:id="@+id/filter_text8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="TextView"
-                    app:layout_constraintTop_toBottomOf="@id/filter8"/>
+                    android:text="정선(산수화)"
+                    app:layout_constraintTop_toBottomOf="@id/filter8" />
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/filter9"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:onClick="sendFilter"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/monalisa"
+                    android:tag="Mona_lisa"
+                    app:srcCompat="@mipmap/ic_launcher" />
+
+                <TextView
+                    android:id="@+id/filter_text9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="모나리자"
+                    app:layout_constraintTop_toBottomOf="@id/filter9" />
             </android.support.constraint.ConstraintLayout>
         </LinearLayout>
     </HorizontalScrollView>
