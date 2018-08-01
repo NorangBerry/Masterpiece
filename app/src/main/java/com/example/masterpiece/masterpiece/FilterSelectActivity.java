@@ -38,7 +38,6 @@ public class FilterSelectActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Uri imageUri = intent.getParcelableExtra("image");
         try {
-
             InputStream imageStream = getContentResolver().openInputStream(imageUri);
             image = BitmapFactory.decodeStream(imageStream);
             ImageView imageView = findViewById(R.id.origin_image);
