@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.graphics.Point;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
@@ -148,6 +149,19 @@ public class ResultActivity extends AppCompatActivity {
             FileOutputStream ostream = new FileOutputStream(cachePath);
             image.compress(Bitmap.CompressFormat.JPEG, 100, ostream);
             ostream.close();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                Intent mediaScanIntent = new Intent(
+                        Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+                Uri photoURI = FileProvider.getUriForFile(this, this.getApplicationContext().getPackageName() + ".com.example.masterpiece.masterpiece", cachePath);
+                mediaScanIntent.setData(photoURI);
+                this.sendBroadcast(mediaScanIntent);
+            } else {
+                sendBroadcast(new Intent(
+                        Intent.ACTION_MEDIA_MOUNTED,
+                        Uri.parse("file://"
+                                + Environment.getExternalStorageDirectory())));
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
