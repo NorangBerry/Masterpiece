@@ -48,11 +48,13 @@ public class FilterSelectActivity extends AppCompatActivity {
     }
 
     public void sendFilter(final View view) {
+        view.setClickable(false);
         Volley.newRequestQueue(getApplicationContext()).add(new StringRequest(StringRequest.Method.GET,
                 "http://143.248.38.75:8080/input/filter?filter=" + view.getTag().toString(),
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        sendImage(view);
                         System.out.println(response);
                     }
                 },
@@ -63,9 +65,7 @@ public class FilterSelectActivity extends AppCompatActivity {
                     }
                 })
         );
-        sendImage(view);
-        Intent intent = new Intent(getApplicationContext(), LearningActivity.class);
-        startActivity(intent);
+
     }
 
     public void sendImage(final View view) {
@@ -74,6 +74,8 @@ public class FilterSelectActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(NetworkResponse response) {
+                        Intent intent = new Intent(getApplicationContext(), LearningActivity.class);
+                        startActivity(intent);
                         Log.d("return value", response.toString());
                     }
                 },
