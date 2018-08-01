@@ -140,26 +140,18 @@ public class ResultActivity extends AppCompatActivity {
 
     public void saveImage(View view) {
         File root = Environment.getExternalStorageDirectory();
-        File directory = new File(root.getAbsolutePath() + "/DCIM/Camera/");
-        if(!directory.mkdirs())
-            directory.mkdir();
+        File cachePath = new File(root.getAbsolutePath() + "/DCIM/Camera/"+image_name+".jpg");
+        if(!cachePath.mkdirs())
+            cachePath.mkdir();
 
         // Create imageDir
-        File mypath = new File(directory, image_name + ".jpg");
-
-        FileOutputStream fos = null;
         try {
-            fos = new FileOutputStream(mypath);
-            // Use the compress method on the BitMap object to write image to the OutputStream
-            image.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            cachePath.createNewFile();
+            FileOutputStream ostream = new FileOutputStream(cachePath);
+            image.compress(Bitmap.CompressFormat.JPEG, 100, ostream);
+            ostream.close();
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            try {
-                fos.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
         Toast.makeText(this,"save",Toast.LENGTH_SHORT).show();
     }

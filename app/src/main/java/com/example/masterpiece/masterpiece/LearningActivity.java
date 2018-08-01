@@ -55,8 +55,10 @@ public class LearningActivity extends AppCompatActivity {
                                             startActivity(intent);
 
                                         }
-                                        load_one_by_one(load_img(count));
-                                        count += 1;
+                                        else {
+                                            load_one_by_one(load_img(count));
+                                            count += 1;
+                                        }
                                     }
                                 } catch (Exception e) {
                                     e.printStackTrace();
