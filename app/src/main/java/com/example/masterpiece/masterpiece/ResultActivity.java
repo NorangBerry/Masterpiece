@@ -9,6 +9,7 @@ import android.graphics.Matrix;
 import android.graphics.Point;
 import android.net.Uri;
 import android.os.Environment;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,7 +31,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class ResultActivity extends AppCompatActivity {
     public RequestQueue queue;
@@ -44,8 +47,12 @@ public class ResultActivity extends AppCompatActivity {
         Intent intent = getIntent();
         queue = Volley.newRequestQueue(this);
         final ImageView imageView = findViewById(R.id.imageView);
-        image_name = Calendar.getInstance().getTime().toString();
+        image_name = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss_SSS").format(new Date());
         setResultImage();
+
+
+
+
     }
 
     public void setResultImage() {
@@ -59,6 +66,21 @@ public class ResultActivity extends AppCompatActivity {
                                 Log.d("ResponseLog", response.toString());
                                 image = BitmapFactory.decodeByteArray(response, 0, response.length);
                                 setImage(image);
+                                Volley.newRequestQueue(getApplicationContext()).add(new StringRequest(StringRequest.Method.GET,
+                                        "http://143.248.38.75:8080/done?done=" + "True",
+                                        new Response.Listener<String>() {
+                                            @Override
+                                            public void onResponse(String response) {
+                                                System.out.println(response);
+                                            }
+                                        },
+                                        new Response.ErrorListener() {
+                                            @Override
+                                            public void onErrorResponse(VolleyError error) {
+                                                System.out.println(error.getMessage());
+                                            }
+                                        })
+                                );
                             }
                         } catch (Exception e) {
                             // TODO Auto-generated catch block
@@ -115,9 +137,11 @@ public class ResultActivity extends AppCompatActivity {
         return resizedBitmap;
     }
     public void saveImage(View view) {
-        ContextWrapper cw = new ContextWrapper(getApplicationContext());
-        // path to /data/data/yourapp/app_data/imageDir
-        File directory = cw.getDir("imageㄴ", Context.MODE_PRIVATE);
+        File root = Environment.getExternalStorageDirectory();
+        File directory = new File(root.getAbsolutePath() + "/DCIM/Camera/");
+        if(!directory.mkdirs())
+            directory.mkdir();
+
         // Create imageDir
         File mypath = new File(directory, image_name + ".jpg");
 
@@ -139,20 +163,22 @@ public class ResultActivity extends AppCompatActivity {
     }
 
     public void shareImage(View view) {
+        Bitmap bitmap = image;
+        File root = Environment.getExternalStorageDirectory();
+        File cachePath = new File(root.getAbsolutePath() + "/DCIM/Camera/"+image_name+".jpg");
         try {
-            File file = new File(this.getExternalCacheDir(), image_name + ".jpg");
-            FileOutputStream fOut = new FileOutputStream(file);
-            image.compress(Bitmap.CompressFormat.JPEG, 100, fOut);
-            fOut.flush();
-            fOut.close();
-            file.setReadable(true, false);
-            final Intent intent = new Intent(android.content.Intent.ACTION_SEND);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
-            intent.setType("image/jpeg");
-            startActivity(Intent.createChooser(intent, "Share image via"));
+            cachePath.createNewFile();
+            FileOutputStream ostream = new FileOutputStream(cachePath);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, ostream);
+            ostream.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        Uri photoURI = FileProvider.getUriForFile(this, this.getApplicationContext().getPackageName() + ".com.example.masterpiece.masterpiece", cachePath);
+        Intent share = new Intent(Intent.ACTION_SEND);
+        share.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        share.setDataAndType(photoURI, "image/*");
+        share.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(Intent.createChooser(share,"Share via"));
     }
 }
